@@ -255,6 +255,19 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons,
+    config = function()
+      require('oil').setup()
+      vim.keymap.set('n', '<C-n>', ':Oil<CR>', { desc = 'Open Parent Directory' })
+    end,
+  },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -823,21 +836,12 @@ require('lazy').setup({
       }
     end,
   },
-
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    priority = 1000,
     init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like:
+      vim.cmd.colorscheme 'rose-pine'
       vim.cmd.hi 'Comment gui=none'
     end,
   },
