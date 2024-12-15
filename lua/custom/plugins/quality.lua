@@ -10,10 +10,6 @@ return {
     end,
   },
   {
-    'stevearc/dressing.nvim',
-    opts = {},
-  },
-  {
     'echasnovski/mini.surround',
     config = function()
       require('mini.surround').setup {

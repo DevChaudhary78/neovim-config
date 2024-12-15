@@ -25,19 +25,6 @@ vim.opt.showmode = false
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
--- Separate delete and cut command
-local opts = { noremap = true, silent = true }
-
--- Separate out cut and delete
--- Normal mode mappings
-vim.keymap.set('n', 'd', '"_d', opts)
-vim.keymap.set('n', 'D', '"_D', opts)
-vim.keymap.set('n', 'c', '"_c', opts)
-vim.keymap.set('n', 'C', '"_C', opts)
-
--- Visual mode mapping
-vim.keymap.set('x', 'd', '"_d', opts)
-
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -656,10 +643,14 @@ require('lazy').setup({
     end,
   },
   {
-    'NLKNguyen/papercolor-theme',
-    name = 'papercolor-theme',
+    'ribru17/bamboo.nvim',
+    lazy = false,
+    priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'papercolor'
+      require('bamboo').setup {
+        vim.cmd [[colorscheme bamboo]],
+      }
+      require('bamboo').load()
     end,
   },
 
@@ -683,12 +674,6 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.files').setup {
-        windows = {
-          preview = true,
-        },
-        options = {
-          permanent_delete = true,
-        },
         vim.keymap.set('n', '<C-n>', function()
           MiniFiles.open()
         end, { noremap = true, silent = true }),
