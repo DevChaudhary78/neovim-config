@@ -16,4 +16,22 @@ return {
       })
     end,
   },
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    config = function()
+      require('oil').setup {
+        columns = {
+          'icon',
+        },
+        view_options = {
+          show_hidden = true,
+        },
+        default_file_explorer = true,
+      }
+      vim.keymap.set('n', '<C-n>', '<CMD>Oil<CR>', { noremap = true, silent = true })
+    end,
+  },
 }

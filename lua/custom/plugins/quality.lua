@@ -1,5 +1,22 @@
 return {
   {
+    'folke/snacks.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = {
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      scroll = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+      rename = { enabled = true },
+    },
+  },
+  {
     'windwp/nvim-autopairs',
     dependencies = { 'hrsh7th/nvim-cmp' },
     config = function()
@@ -34,21 +51,6 @@ return {
       require('colorizer').setup {}
     end,
   },
-
-  {
-    'michaelb/sniprun',
-    branch = 'master',
-
-    build = 'sh install.sh',
-    -- do 'sh install.sh 1' if you want to force compile locally
-    -- (instead of fetching a binary from the github release). Requires Rust >= 1.65
-
-    config = function()
-      require('sniprun').setup {
-        -- your options
-      }
-    end,
-  },
   {
     'Exafunction/codeium.nvim',
     dependencies = {
@@ -58,23 +60,6 @@ return {
     },
     config = function()
       require('codeium').setup {}
-    end,
-  },
-  {
-    'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('nvim-web-devicons').setup {}
-    end,
-  },
-  {
-    'ribru17/bamboo.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('bamboo').setup {
-        -- optional configuration here
-      }
-      require('bamboo').load()
     end,
   },
   {
@@ -89,12 +74,6 @@ return {
         section_separators = { left = '', right = '' },
       },
     },
-  },
-  {
-    'nvim-tree/nvim-web-devicons',
-    setup = function()
-      require('nvim-web-devicons').setup {}
-    end,
   },
   {
     -- Add indentation guides even on blank lines
@@ -115,25 +94,5 @@ return {
     config = function()
       vim.g.cutlass_override_del = 1
     end,
-  },
-  {
-    'folke/snacks.nvim',
-    priority = 1000,
-    lazy = false,
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-      bigfile = { enabled = true },
-      dashboard = { enabled = true },
-      indent = { enabled = true },
-      input = { enabled = true },
-      notifier = { enabled = true },
-      quickfile = { enabled = true },
-      scroll = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
-      rename = { enabled = true },
-    },
   },
 }
