@@ -120,6 +120,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Configuring :term
+vim.api.nvim_create_autocmd('TermOpen', {
+  desc = 'Disable numbers and relativenumbers in terminal mode',
+  group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+  callback = function()
+    vim.opt.relativenumber = false
+    vim.opt.number = false
+  end,
+})
+
+vim.keymap.set('n', '<space>ts', function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd 'J'
+  vim.api.nvim_win_set_height(0, 15)
+end)
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
