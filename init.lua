@@ -120,7 +120,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Configuring :term
+-- Configuring :term, <leader>ts will toggle terminal in normal mode
+local terminal_bufnr = nil
+
 vim.api.nvim_create_autocmd('TermOpen', {
   desc = 'Disable numbers and relativenumbers in terminal mode',
   group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
@@ -132,10 +134,25 @@ vim.api.nvim_create_autocmd('TermOpen', {
 })
 
 vim.keymap.set('n', '<space>ts', function()
-  vim.cmd.vnew()
-  vim.cmd.term()
-  vim.cmd.wincmd 'J'
-  vim.api.nvim_win_set_height(0, 15)
+  if terminal_bufnr and vim.api.nvim_buf_is_valid(terminal_bufnr) then
+    -- Toggle terminal visibility
+    local win_id = vim.fn.bufwinid(terminal_bufnr)
+    if win_id ~= -1 then
+      vim.api.nvim_win_hide(win_id)
+    else
+      vim.cmd.split() -- Open the terminal in a split window
+      vim.api.nvim_win_set_buf(0, terminal_bufnr)
+      vim.cmd.wincmd 'L'
+      vim.api.nvim_win_set_width(0, 60)
+    end
+  else
+    -- Create a new terminal if none exists
+    vim.cmd.vnew()
+    vim.cmd.term()
+    vim.cmd.wincmd 'L'
+    vim.api.nvim_win_set_width(0, 60)
+    terminal_bufnr = vim.api.nvim_get_current_buf()
+  end
 end)
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -447,7 +464,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {
-          cmd = { 'clangd', '--log=verbose' },
+          cmd = { 'clangd', '--log=verbose', 'C:\\msys64\\mingw64\\bin\\gcc.exe' },
         },
         -- gopls = {},
         -- pyright = {},
