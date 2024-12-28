@@ -679,17 +679,17 @@ require('lazy').setup({
           { name = 'copilot' },
           { name = 'luasnip' },
           { name = 'nvim_lsp' },
-          { name = 'codeium' },
+          -- { name = 'codeium' },
           { name = 'path' },
         },
-        formattingConfig = {
-          format = require('lspkind').cmp_format {
-            mode = 'symbol',
-            maxwidth = 50,
-            ellipsis_char = '...',
-            symbol_map = { Codeium = '' },
-          },
-        },
+        -- formattingConfig = {
+        --   format = require('lspkind').cmp_format {
+        --     mode = 'symbol',
+        --     maxwidth = 50,
+        --     ellipsis_char = '...',
+        --     -- symbol_map = { Codeium = '' },
+        --   },
+        -- },
       }
     end,
   },
